@@ -1,2 +1,24 @@
 ---
-# tasks file for security
+# tasks file for build
+- name: Ensure the packages are installed
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+       - default-jdk
+       - maven
+- name: Catch the application from git
+  git:
+    repo: http://github.com/koddas/war-web-project.git
+    dest: /usr/war-web-project
+
+- name: Run mvn clean the app's folder
+  shell:
+    cmd: mvn clean package
+    chdir: /usr/war-web-project
+
+- name: Synchronization of build and prod directories
+  synchronize:
+    mode: pull
+    src: /usr/war-web-project/target/wwp-1.0.0.war
+    dest: /var/lib/tomcat9/webapps/
+  delegate_to: "{{ groups['prod'][0] }}"
+...

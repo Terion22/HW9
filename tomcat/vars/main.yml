@@ -1,2 +1,5 @@
 ---
 # vars file for tomcat
+directory: /var/lib/tomcat9/webapps
+artifact: wwp-1.0.0.war
+...
