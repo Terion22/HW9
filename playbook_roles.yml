@@ -1,14 +1,14 @@
 ---
-- name: Ensure tomcat package is present
+- name: Configuration for production node
   hosts: prod
   become: yes
 
   roles:
    - common
    - tomcat
-   - security
+   - build
 
-- name: Ensure the application is downloaded
+- name: Configuration for development node
   hosts: build
   become: yes
 
