@@ -7,7 +7,7 @@
    - common
    - tomcat
    - build
-
+#---------------------------------------------#
 - name: Configuration for development node
   hosts: build
   become: yes
